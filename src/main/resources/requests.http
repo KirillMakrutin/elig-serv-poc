@@ -1,0 +1,64 @@
+GET localhost:8080/rules
+
+###
+GET localhost:8080/rules/squeeze
+
+###
+POST localhost:8080/rule
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "Test-Manual",
+  "rootGroup": {
+    "type": "LOGICAL_GROUP",
+    "operator": "OR",
+    "elements": [
+      {
+        "type": "HOST_CODE_ATTRIBUTE",
+        "code": "SL",
+        "attribute": "STUDENT_LEVEL",
+        "inclusion": "INCLUDE",
+        "matching": "ANY"
+      },
+      {
+        "type": "BOOLEAN_ATTRIBUTE",
+        "enabled": false,
+        "attribute": "VETERAN_STATUS"
+      },
+      {
+        "type": "LOGICAL_GROUP",
+        "operator": "AND",
+        "elements": [
+          {
+            "type": "HOST_CODE_ATTRIBUTE",
+            "code": "SL2",
+            "attribute": "STUDENT_LEVEL",
+            "inclusion": "EXCLUDE",
+            "matching": "ANY"
+          }
+        ]
+      }
+    ]
+  }
+}
+
+###
+POST localhost:8080/rules/match
+Accept: application/json
+Content-Type: application/json
+
+{
+  "ruleSetId": 2,
+  "userAttributes": {
+    "VETERAN_STATUS": [
+      true
+    ],
+    "STUDENT_LEVEL": [
+      "SL4",
+      "SL3"
+    ]
+  }
+}
+
+###
