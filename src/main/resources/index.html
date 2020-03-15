@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Document</title>
+    <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+            crossorigin="anonymous"
+    />
+    <!--<link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+      crossorigin="anonymous"
+    />-->
+
+    <style>
+        .elig_serv_relation * {
+            box-sizing: border-box;
+        }
+
+        .component {
+            margin-top: 20px;
+        }
+
+        .elig_serv_relation, .elig_serv_rule {
+            margin: 10px auto;
+        }
+
+        .elig_serv_relation .elig_serv_relation {
+            margin: 20px auto;
+        }
+
+        .elig_serv_rule__group {
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: stretch;
+            width: 100%;
+        }
+
+        .elig_serv_rule__group__element {
+            position: relative;
+            flex: 1 1 0%;
+            min-width: 0;
+            margin-bottom: 0;
+        }
+
+        .elig_serv_rule__group__btn {
+            flex: 0 0 auto;
+        }
+
+        .elig_serv_rule__group
+        > .elig_serv_rule__group__element
+        + .elig_serv_rule__group__element {
+            margin-left: -1px;
+        }
+
+        .elig_serv_rule__group
+        > .elig_serv_rule__group__element:not(:first-child),
+        .elig_serv_rule__group
+        > .elig_serv_rule__group__element:not(:first-child)
+        .btn {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+        .elig_serv_rule__group > .elig_serv_rule__group__element:not(:last-child),
+        .elig_serv_rule__group
+        > .elig_serv_rule__group__element:not(:last-child)
+        .btn {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        .elig_serv_rule__group
+        > .elig_serv_rule__group__element.form-control:focus {
+            z-index: 3;
+        }
+
+        .elig_serv_rule__group__btn > .btn,
+        .elig_serv_relation__dismiss > .btn {
+            height: 100%;
+        }
+
+        .elig_serv_relation__dismiss > .btn {
+            border-radius: 0;
+        }
+
+        .elig_serv_relation {
+            display: flex;
+            border: 3px solid #ced4da;
+            border-radius: 5px;
+        }
+
+        .elig_serv_relation__operator {
+            flex: 0 0 auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .elig_serv_relation__rules {
+            flex: 1 1 0%;
+            margin: 0 10px;
+        }
+
+        [class^="elig_serv_relation__operator__"] {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #aaa;
+            background-color: #eee;
+            flex: 1 1 0%;
+        }
+
+        .elig_serv_relation__operator_text {
+            transform: rotate(270deg);
+        }
+
+        .elig_serv_relation__operator__active {
+            color: #fff;
+            background-color: #28a745;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Components</h1>
+
+    <div class="component">
+        <div class="elig_serv_relation">
+            <div class="elig_serv_relation__operator">
+                <div class="elig_serv_relation__operator__and">
+                    <span class="elig_serv_relation__operator_text">AND</span>
+                </div>
+                <div
+                        class="elig_serv_relation__operator__or elig_serv_relation__operator__active"
+                >
+                    <span class="elig_serv_relation__operator_text">OR</span>
+                </div>
+            </div>
+            <div class="elig_serv_relation__rules">
+                <div class="elig_serv_rule elig_serv_rule__group">
+                    <select
+                            name="type"
+                            id="elig_serv_attribute_type"
+                            class="elig_serv_rule__group__element elig_serv_rule__group__select form-control"
+                    >
+                        <option value="STUDENT_LEVEL">Student Level</option>
+                        <option value="CAMPUS_CODE">Campus Code</option>
+                    </select>
+                    <input
+                            class="elig_serv_rule__group__element elig_serv_rule__group__input form-control"
+                            type="text"
+                            name="code"
+                            id="elig_serv_code"
+                    />
+                    <div
+                            class="elig_serv_rule__group__element elig_serv_rule__group__addon form-control text-center"
+                    >
+                        <label
+                        >Any&nbsp;<input
+                                type="radio"
+                                name="MATCHING"
+                                value="ANY"
+                                checked
+                        /></label>
+                        <label
+                        ><input
+                                type="radio"
+                                name="MATCHING"
+                                value="ALL"
+                        />&nbsp;All</label
+                        >
+                    </div>
+                    <div
+                            class="elig_serv_rule__group__element elig_serv_rule__group__addon form-control text-center"
+                    >
+                        <label
+                        >Include&nbsp;<input
+                                type="radio"
+                                name="EXCLUSION"
+                                value="INCLUDE"
+                                checked
+                        /></label>
+                        <label
+                        ><input
+                                type="radio"
+                                name="EXCLUSION"
+                                value="EXCLUDE"
+                        />&nbsp;Exclude</label
+                        >
+                    </div>
+                    <div
+                            class="elig_serv_rule__group__element elig_serv_rule__group__btn"
+                    >
+                        <button class="btn btn-danger">X</button>
+                    </div>
+                </div>
+                <div class="elig_serv_rule elig_serv_rule__group">
+                    <select
+                            name="type"
+                            id="elig_serv_attribute_type"
+                            class="elig_serv_rule__group__element elig_serv_rule__group__select form-control"
+                    >
+                        <option value="VETERAN_STATUS">Veteran</option>
+                        <option value="STUDENT_LEVEL">Student Level</option>
+                        <option value="CAMPUS_CODE">Campus Code</option>
+                    </select>
+                    <div
+                            class="elig_serv_rule__group__element elig_serv_rule__group__addon form-control text-center"
+                    >
+                        <label
+                        >Yes&nbsp;<input type="radio" name="CODE" value="true" checked
+                        /></label>
+                        <label
+                        ><input
+                                type="radio"
+                                name="CODE"
+                                value="false"
+                        />&nbsp;No</label
+                        >
+                    </div>
+
+                    <div
+                            class="elig_serv_rule__group__element elig_serv_rule__group__btn"
+                    >
+                        <button class="btn btn-danger">X</button>
+                    </div>
+                </div>
+
+                <div class="elig_serv_relation">
+                    <div class="elig_serv_relation__operator">
+                        <div class="elig_serv_relation__operator__and elig_serv_relation__operator__active"><span
+                                class="elig_serv_relation__operator_text">AND</span></div>
+                        <div
+                                class="elig_serv_relation__operator__or "
+                        >
+                            <span class="elig_serv_relation__operator_text">OR</span>
+                        </div>
+                    </div>
+                    <div class="elig_serv_relation__rules">
+                        <div class="elig_serv_rule elig_serv_rule__group">
+                            <select
+                                    name="type"
+                                    id="elig_serv_attribute_type"
+                                    class="elig_serv_rule__group__element elig_serv_rule__group__select form-control"
+                            >
+                                <option value="STUDENT_LEVEL">Student Level</option>
+                                <option value="CAMPUS_CODE">Campus Code</option>
+                            </select>
+                            <input
+                                    class="elig_serv_rule__group__element elig_serv_rule__group__input form-control"
+                                    type="text"
+                                    name="code"
+                                    id="elig_serv_code"
+                            />
+                            <div
+                                    class="elig_serv_rule__group__element elig_serv_rule__group__addon form-control text-center"
+                            >
+                                <label
+                                >Any&nbsp;<input
+                                        type="radio"
+                                        name="MATCHING"
+                                        value="ANY"
+                                        checked
+                                /></label>
+                                <label
+                                ><input
+                                        type="radio"
+                                        name="MATCHING"
+                                        value="ALL"
+                                />&nbsp;All</label
+                                >
+                            </div>
+                            <div
+                                    class="elig_serv_rule__group__element elig_serv_rule__group__addon form-control text-center"
+                            >
+                                <label
+                                >Include&nbsp;<input
+                                        type="radio"
+                                        name="EXCLUSION"
+                                        value="INCLUDE"
+                                        checked
+                                /></label>
+                                <label
+                                ><input
+                                        type="radio"
+                                        name="EXCLUSION"
+                                        value="EXCLUDE"
+                                />&nbsp;Exclude</label
+                                >
+                            </div>
+                            <div class="elig_serv_rule__group__element elig_serv_rule__group__btn">
+                                <button class="btn btn-danger">X</button>
+                            </div>
+                        </div>
+                        <div class="elig_serv_rule elig_serv_rule__group">
+                            <select
+                                    name="type"
+                                    id="elig_serv_attribute_type"
+                                    class="elig_serv_rule__group__element elig_serv_rule__group__select form-control">
+                                <option value="VETERAN_STATUS">Veteran</option>
+                                <option value="STUDENT_LEVEL">Student Level</option>
+                                <option value="CAMPUS_CODE">Campus Code</option>
+                            </select>
+                            <div class="elig_serv_rule__group__element elig_serv_rule__group__addon form-control text-center">
+                                <label>Yes&nbsp;<input type="radio" name="CODE" value="true" checked/></label>
+                                <label>
+                                    <input
+                                            type="radio"
+                                            name="CODE"
+                                            value="false"/>&nbsp;No
+                                </label>
+                            </div>
+
+                            <div class="elig_serv_rule__group__element elig_serv_rule__group__btn">
+                                <button class="btn btn-danger">X</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="elig_serv_relation__dismiss">
+                        <button class="btn btn-warning">X</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>
