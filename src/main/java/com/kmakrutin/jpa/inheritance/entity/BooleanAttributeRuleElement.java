@@ -23,14 +23,21 @@ public class BooleanAttributeRuleElement extends Element {
     @Column
     private Attribute attribute;
 
+
+    @Override
+    public boolean checkEligibility(UserVerificationDto userVerificationDto) {
+        return evaluate(userVerificationDto);
+    }
+
     @Override
     public boolean evaluate(UserVerificationDto userVerificationDto) {
-        List<Object> singleBooleanAttributeList = userVerificationDto.getUserAttributes().getOrDefault(attribute, Collections.emptyList());
+        List<String> singleBooleanAttributeList = userVerificationDto.getUserAttributes().getOrDefault(attribute, Collections.emptyList());
+
         if (singleBooleanAttributeList.isEmpty()) {
             return true;
         }
 
-        return enabled == Boolean.parseBoolean(singleBooleanAttributeList.get(0).toString());
+        return enabled == Boolean.parseBoolean(singleBooleanAttributeList.get(0));
     }
 
     @Override

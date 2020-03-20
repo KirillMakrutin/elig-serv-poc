@@ -23,13 +23,13 @@ public class DataLoader implements CommandLineRunner {
         rootGroupElement.setOperator(Operator.OR);
 
         HostCodeRuleElement ruleElement1 = new HostCodeRuleElement();
-        ruleElement1.setCode("A");
+        ruleElement1.addCode("A").addCode("B");
         ruleElement1.setInclusion(Inclusion.INCLUDE);
         ruleElement1.setMatching(Matching.ANY);
         ruleElement1.setAttribute(Attribute.COLLEAGUE_CODE);
 
         HostCodeRuleElement ruleElement2 = new HostCodeRuleElement();
-        ruleElement2.setCode("B");
+        ruleElement2.addCode("C");
         ruleElement2.setInclusion(Inclusion.EXCLUDE);
         ruleElement2.setMatching(Matching.ALL);
         ruleElement2.setAttribute(Attribute.CLASS_CODE);
@@ -38,13 +38,13 @@ public class DataLoader implements CommandLineRunner {
         nestedGroupElement.setOperator(Operator.AND);
 
         HostCodeRuleElement ruleElement3 = new HostCodeRuleElement();
-        ruleElement3.setCode("C");
+        ruleElement3.addCode("E").addCode("F");
         ruleElement3.setInclusion(Inclusion.EXCLUDE);
         ruleElement3.setMatching(Matching.ANY);
         ruleElement3.setAttribute(Attribute.COLLEAGUE_CODE);
 
         HostCodeRuleElement ruleElement4 = new HostCodeRuleElement();
-        ruleElement4.setCode("D");
+        ruleElement4.addCode("G").addCode("I").addCode("h");
         ruleElement4.setInclusion(Inclusion.EXCLUDE);
         ruleElement4.setMatching(Matching.ANY);
         ruleElement4.setAttribute(Attribute.STUDENT_LEVEL);

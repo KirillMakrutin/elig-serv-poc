@@ -10,8 +10,8 @@ import java.util.Map;
 
 @ToString
 public class UserVerificationDto {
+    private final Map<Attribute, List<String>> userAttributes = new HashMap<>();
     private int ruleSetId;
-    private final Map<Attribute, List<Object>> userAttributes = new HashMap<>();
 
     public int getRuleSetId() {
         return ruleSetId;
@@ -21,11 +21,11 @@ public class UserVerificationDto {
         this.ruleSetId = ruleSetId;
     }
 
-    public Map<Attribute, List<Object>> getUserAttributes() {
+    public Map<Attribute, List<String>> getUserAttributes() {
         return userAttributes;
     }
 
-    public UserVerificationDto addAttribute(Attribute attribute, Object attributeValue) {
+    public UserVerificationDto addAttribute(Attribute attribute, String attributeValue) {
         this.userAttributes.computeIfAbsent(attribute, key -> new ArrayList<>()).add(attributeValue);
         return this;
     }

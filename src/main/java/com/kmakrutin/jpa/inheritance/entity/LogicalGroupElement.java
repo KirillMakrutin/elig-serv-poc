@@ -1,7 +1,9 @@
 package com.kmakrutin.jpa.inheritance.entity;
 
+import com.kmakrutin.jpa.inheritance.dto.UserVerificationDto;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.apache.commons.collections4.CollectionUtils;
 
 import javax.persistence.*;
 import java.util.List;
@@ -23,6 +25,15 @@ public class LogicalGroupElement extends Element {
             orphanRemoval = true)
     @JoinColumn(name = "parent_element_id")
     private List<Element> elements;
+
+
+    @Override
+    public boolean checkEligibility(UserVerificationDto userVerificationDto) {
+        return CollectionUtils.isEmpty(elements)
+                || Operator.AND.equals(this.operator)
+                ? elements.stream().allMatch(element -> element.checkEligibility(userVerificationDto))
+                : elements.stream().anyMatch(element -> element.checkEligibility(userVerificationDto));
+    }
 
     @Override
     public String toExpression() {

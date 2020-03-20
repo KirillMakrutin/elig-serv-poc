@@ -21,6 +21,10 @@ public class EligibilityCodeExpressionEvaluator implements ExpressionEvaluator {
         JexlContext context = new MapContext();
         ruleSet.getRules().forEach(rule -> context.set(rule.toExpression(), rule.evaluate(userVerificationDto)));
 
-        return (Boolean) expression.evaluate(context);
+        Boolean jaxelResult = (Boolean) expression.evaluate(context);
+
+        log.info("JEXL vs Native: {} vs {}", jaxelResult, ruleSet.getRootGroup().checkEligibility(userVerificationDto));
+
+        return jaxelResult;
     }
 }

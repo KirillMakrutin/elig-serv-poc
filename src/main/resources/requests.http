@@ -16,7 +16,10 @@ Content-Type: application/json
     "elements": [
       {
         "type": "HOST_CODE_ATTRIBUTE",
-        "code": "SL",
+        "codes": [
+          "SL",
+          "SL2"
+        ],
         "attribute": "STUDENT_LEVEL",
         "inclusion": "INCLUDE",
         "matching": "ANY"
@@ -32,7 +35,55 @@ Content-Type: application/json
         "elements": [
           {
             "type": "HOST_CODE_ATTRIBUTE",
-            "code": "SL2",
+            "codes": [
+              "SL2",
+              "SL3"
+            ],
+            "attribute": "STUDENT_LEVEL",
+            "inclusion": "EXCLUDE",
+            "matching": "ANY"
+          }
+        ]
+      }
+    ]
+  }
+}
+
+###
+POST localhost:8080/rule
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "Test-Manual",
+  "rootGroup": {
+    "type": "LOGICAL_GROUP",
+    "operator": "OR",
+    "elements": [
+      {
+        "type": "HOST_CODE_ATTRIBUTE",
+        "codes": [
+          "SL",
+          "SL2"
+        ],
+        "attribute": "STUDENT_LEVEL",
+        "inclusion": "INCLUDE",
+        "matching": "ANY"
+      },
+      {
+        "type": "BOOLEAN_ATTRIBUTE",
+        "enabled": false,
+        "attribute": "VETERAN_STATUS"
+      },
+      {
+        "type": "LOGICAL_GROUP",
+        "operator": "AND",
+        "elements": [
+          {
+            "type": "HOST_CODE_ATTRIBUTE",
+            "codes": [
+              "SL5"
+            ],
             "attribute": "STUDENT_LEVEL",
             "inclusion": "EXCLUDE",
             "matching": "ANY"
@@ -49,7 +100,7 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "ruleSetId": 2,
+  "ruleSetId": 3,
   "userAttributes": {
     "VETERAN_STATUS": [
       true

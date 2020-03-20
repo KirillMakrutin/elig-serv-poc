@@ -32,6 +32,9 @@ public abstract class Element {
     @Column
     private Long id;
 
+    @Transient
+    public abstract boolean checkEligibility(UserVerificationDto userVerificationDto);
+
     @JsonIgnore
     @Transient
     public String toExpression() {
